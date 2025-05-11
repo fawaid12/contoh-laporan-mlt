@@ -48,6 +48,16 @@ Dataset ini terdiri dari 2200 baris data dan 8 kolom:
 
 - label: Jenis tanaman (target klasifikasi)
 
+Data yang telah dimuat kemudian dilakukan eksplorasi data (EDA) untuk menggali lebih dalam informasi dari data, seperti:
+
+- Distribusi nilai pada tiap fitur numerik untuk mendeteksi skewness atau konsistensi skala antar fitur.
+
+- Rata-rata dan sebaran nilai tiap fitur untuk memahami tren umum pada parameter lingkungan.
+
+- Data yang missing value atau duplicate
+
+- jumlah dan distribusi label tanaman untuk memastikan data target tidak terlalu imbang atau bias terhadap jenis tanaman tertentu.
+
 Untuk memahami struktur dan distribusi data, dilakukan beberapa teknik visualisasi:
 
 - Histogram: Untuk melihat distribusi nilai pada setiap fitur numerik seperti N, P, K, suhu, kelembaban, pH, dan curah hujan.
@@ -58,7 +68,7 @@ Untuk memahami struktur dan distribusi data, dilakukan beberapa teknik visualisa
 
 - Boxplot: Untuk mendeteksi adanya outlier pada fitur numerik.
 
-    Visualisasi ini membantu dalam menganalisis pola, mendeteksi distribusi yang tidak seimbang, serta mengenali fitur yang mungkin redundant atau saling berkorelasi tinggi. digunakan untuk mendeteksi adanya outlier pada fitur numerik. Outlier ditemukan pada beberapa fitur (seperti rainfall dan potassium), namun tidak dihapus karena masih dapat mencerminkan kondisi riil yang ekstrem di dunia nyata.
+Visualisasi ini membantu dalam menganalisis pola, mendeteksi distribusi yang tidak seimbang, serta mengenali fitur yang mungkin redundant atau saling berkorelasi tinggi. digunakan untuk mendeteksi adanya outlier pada fitur numerik. Outlier ditemukan pada beberapa fitur (seperti rainfall dan potassium), namun tidak dihapus karena masih dapat mencerminkan kondisi riil yang ekstrem di dunia nyata.
   
 ## Data Preparation
 
