@@ -96,18 +96,55 @@ Model yang digunakan:
 
 Setiap model dilatih menggunakan data latih terstandarisasi. Belum dilakukan hyperparameter tuning lanjutan, karena fokus utama proyek ini adalah membandingkan baseline performa antar algoritma.
 
-Kelebihan & Kekurangan Singkat:
+## Model 1 : Decision Tree
+- Cara Kerja: Decision Tree bekerja dengan membagi data ke dalam cabang berdasarkan fitur yang memberikan informasi paling besar terhadap target (information gain atau Gini impurity). Proses ini dilakukan secara rekursif hingga mencapai kondisi berhenti tertentu (misal: daun murni atau kedalaman maksimum).
+  
+- Parameter: Menggunakan random_state=42: Untuk memastikan hasil pembagian dan pembuatan tree konsisten (reproducibility) serta parameter lainnya default, seperti criterion='gini' dan max_depth=None.
+  
+- Kelebihan : Mudah dipahami dan divisualisasikan.
+  
+- Kekurangan: rentan terhadap overfitting jika tidak dipangkas.
 
-- Random Forest: Akurasi tinggi dan robust terhadap outlier, tetapi lebih kompleks.
+## Model 2 : Random Forest
 
-- GaussianNB: Cepat, ringan, dan surprisingly akurat di dataset ini.
+- Cara Kerja: Random Forest merupakan ansambel dari banyak Decision Tree yang dilatih dengan data acak dan subset fitur. Hasil prediksi diperoleh dari voting mayoritas antar pohon.
 
-- KNN: Sederhana tapi sensitif terhadap skala dan outlier.
+- Parameter: Menggunakan n_estimators=100 (default), random_state=42 untuk hasil pelatihan konsisten, dan parameter lainnya default.
 
-- SVC: Bagus untuk data dengan margin yang jelas, tapi butuh banyak tuning.
+- Kelebihan : Akurasi tinggi dan robust terhadap overfitting.
+  
+- Kekurangan: Kurang interpretatif dan lebih lambat daripada single tree.
 
-- Decision Tree: Mudah dimengerti dan cepat, tapi bisa overfitting.
+## Model 3 : K-Nearest Neighbors (KNN)
 
+- Cara Kerja: KNN melakukan klasifikasi berdasarkan mayoritas label dari K tetangga terdekat (berdasarkan jarak Euclidean) dari sampel yang diuji.
+  
+- Parameter: Parameter default seperti menggunakan n_neighbors=5, weights='uniform', metric='minkowski' dengan p=2 (jarak Euclidean).
+  
+- Kelebihan : Sederhana dan tidak memerlukan pelatihan.
+  
+- Kekurangan: Sensitif terhadap skala dan noise, serta lambat untuk prediksi data besar.
+
+## Model 4 : Support Vector Classifier (SVC)
+
+- Cara Kerja: SVC mencari hyperplane terbaik yang memisahkan kelas-kelas data dengan margin maksimum. Dapat diperluas untuk klasifikasi non-linear menggunakan kernel trick.
+
+- Parameter: semua parameter default seperti menggunakan kernel default ('rbf'), C=1.0 (regularisasi), dan gamma=scale.
+
+- Kelebihan : Kuat untuk data dengan margin jelas.
+  
+- Kekurangan: Mahal secara komputasi dan butuh tuning parameter yang cermat.
+
+## Model 5 : Gaussian Naive Bayes
+
+- Cara Kerja: Naive Bayes mengasumsikan bahwa fitur bersifat independen satu sama lain dan mengikuti distribusi normal. Probabilitas setiap kelas dihitung menggunakan Teorema Bayes.
+  
+- Parameter: Menggunakan seluruh parameter default dari GaussianNB().
+  
+- Kelebihan : Sangat cepat dan efisien, cocok untuk dataset besar.
+  
+- Kekurangan: Mengasumsikan independensi fitur yang jarang terpenuhi sepenuhnya.
+  
 ## Evaluation
 Metrik evaluasi:
 
