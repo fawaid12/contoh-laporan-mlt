@@ -49,11 +49,12 @@ Dataset diambil dari [Kaggle - Anime Recommendations Database](https://www.kaggl
    - anime_id: ID anime
    - rating: Skor yang diberikan pengguna (1-10, -1 untuk belum menonton)
 
+Sebelum melakukan EDA dilakukan pengecekan informasi data seperti info, head, cek missing value, dan cek duplikat langkah ini bertujuan agar bisa diantisipasi di data preparation untuk dibenahi jika masih ada data yang kotor.
+
 ### B. Exploratory Data Analysis (EDA)
-- Distribusi jumlah rating per user
-- Top anime dengan rating terbanyak
-- Genre yang paling umum
-- Korelasi rating vs genre
+- Distribusi jumlah rating per user : jumlah yang memberikan rating 8 terbanyak diikuti oleh rating 7 dan rating 9
+- Genre yang paling umum : genre terbanyak yaitu comedy dengan jumlah judul anime 4000 lebih kemudian diikuti genre action, adventure, dan lainnya.
+- Korelasi rating vs genre : genre anime dengan rata-rata rating tertinggi yaitu anime yang bergenre josei dengan rating lebih dari 7 mendekati 8, kemudian diikuti oleh thriler, mystery, dan lainnya. 
 
 ## Data Preparation
 Sebelum membangun model sistem rekomendasi, langkah krusial yang harus dilakukan adalah data preparation. Data mentah sering kali mengandung nilai kosong, duplikat, inkonsistensi format, serta belum dalam bentuk yang sesuai untuk diolah oleh model. Tanpa tahap ini, performa model bisa menurun drastis atau bahkan gagal dijalankan. Data cleaning yang dilakukan secara umum penghapusan data missing value dan data duplicate. Tanpa tahap ini, performa model bisa menurun drastis atau bahkan gagal dijalankan. Oleh karena itu, data preparation dilakukan untuk memastikan:
