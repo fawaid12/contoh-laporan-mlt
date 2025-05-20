@@ -3,7 +3,7 @@
 ## Project Overview
 Anime merupakan salah satu bentuk hiburan visual yang sangat populer secara global. Dengan ribuan judul dan genre berbeda yang tersedia, pengguna sering kali kebingungan menentukan anime berikutnya yang layak ditonton. Sistem rekomendasi hadir sebagai solusi untuk membantu pengguna menemukan anime sesuai preferensi mereka.
 Proyek ini bertujuan untuk membangun sistem rekomendasi anime yang personal dan relevan dengan memanfaatkan dua pendekatan:
-- **Content-Based Filtering (CBF)**: Merekomendasikan anime yang mirip dengan apa yang disukai pengguna berdasarkan konten (genre & sinopsis).
+- **Content-Based Filtering (CBF)**: Merekomendasikan anime yang mirip dengan apa yang disukai pengguna berdasarkan konten (genre & judul).
 - **Collaborative Filtering dengan NeuMF**: Mempelajari pola interaksi pengguna dan item melalui model deep learning.
 
 Proyek ini penting untuk dikembangkan karena dapat membantu mempermudah eksplorasi konten, meningkatkan kepuasan pengguna, dan mengurangi waktu pencarian tontonan yang sesuai.
@@ -124,30 +124,48 @@ Neural Matrix Factorization (NeuMF) merupakan model sistem rekomendasi yang diba
   - Loss: Mean Squared Error (MSE)
   - Metric: Mean Absolute Error (MAE)
   - Optimizer: Adam
+  - learning rate default
   - EarlyStopping digunakan untuk menghentikan pelatihan jika model tidak membaik selama 3 epoch.
-
-Tahapan ini membahas mengenai model sisten rekomendasi yang Anda buat untuk menyelesaikan permasalahan. Sajikan top-N recommendation sebagai output.
-
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menyajikan dua solusi rekomendasi dengan algoritma yang berbeda.
-- Menjelaskan kelebihan dan kekurangan dari solusi/pendekatan yang dipilih.
+  - Epoch : 10
+  - Batch size : 64
+### Top N-Recomendation
+Pada tahap ini dilakukan uji coba terhadap model yang dibangun dengan 10 top rekomendation yaitu 
+- Conten Based Filtering menggunakan fitur name atau judul anime naruto yang menghasilkan judul yang berhubungan dengan naruto dan genre mirip dengan genre naruto
+- Collaborative Filtering dengen NeuMF menggunakan fitur user_id yang mana menghasilkan 10 top rekomendasi judul anime yang disukai oleh user_id. contoh yang diambil user_id 3
 
 ## Evaluation
-
+Evaluasi bertujuan untuk mengukur tingkat keberhasilan pembangunan sebuah model yang dihasilkan.
 ### Content Based Filtering
+Sebelum model dievaluasi dilakukan pengukuran nilai cosine similiarity terhadap judul anime yang disebutkan. Nilai yang dihasil dari rata-rata similarity tertinggi dari 100 sampel: 0.9805
+Untuk menilai kinerja sistem rekomendasi, dapat dilakukan evaluasi dengan beberapa metrik berikut:
+- Precision: Menghitung persentase rekomendasi anime yang sesuai dengan preferensi pengguna.
+- Recall: Mengukur kemampuan sistem dalam merekomendasikan anime yang relevan dari seluruh film yang tersedia.
+- F1-Score: Gabungan antara precision dan recall yang memberikan evaluasi seimbang atas akurasi dan kelengkapan rekomendasi.
 
+Metrik evaluasi:
+- Precision = TP / (TP + FP)
+- Recall = TP / (TP + FN)
+- F1 Score = 2 * (Precision * Recall) / (Precision + Recall)
+Hasil dari evaluasi content based filtering yaitu :
+- Average Precision : 0.0033
+- Average Recall    : 0.0004
+- Average F1 Score  : 0.0007 
 
 ### Collaborativ Filtering
 Model dievaluasi berdasarkan:
 - Loss Function (MSE): Untuk menghitung error kuadrat prediksi rating.
 - MAE (Mean Absolute Error): Rata-rata selisih mutlak antara rating prediksi dan aktual.
-Pada bagian ini Anda perlu menyebutkan metrik evaluasi yang digunakan. Kemudian, jelaskan hasil proyek berdasarkan metrik evaluasi tersebut.
 
-Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, problem statement, dan solusi yang diinginkan.
+Hasil dari evaluasi :
+- MSE : 1.2328
+- MAE : 0.9424
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan formula metrik dan bagaimana metrik tersebut bekerja.
-
+### Evaluation Bussiness Understanding
+- Problem Statement : Tercapai secara fungsional, tetapi belum optimal secara akurasi dan kedua pendekatan belum memberikan hasil yang memuaskan
+- Goals : Rata-rata tercapai namun perlu peningkatan akurasi terhadap top N rekomendasi
+- Solusion Statement :Rekomendasi masih jauh dari preferensi nyata pengguna, Model butuh penyempurnaan data dan arsitektur, Potensi untuk perbaikan dan pengembangan hybrid model
+## Kesimpulan
+Sistem rekomendasi sudah berfungsi sesuai problem statements dan goals, namun masih perlu perbaikan besar dari sisi akurasi dan relevansi. Nilai-nilai evaluasi menunjukkan bahwa meski pendekatan sudah tepat, performa aktual masih rendah, dan peningkatan model serta data sangat diperlukan untuk mencapai sistem rekomendasi yang benar-benar efektif dan personal. Saran penggabungan secara hibrid sehingga bisa memperkuat rekomendasi yang dihasilkan
 
 ## Referensi
 [[1]](https://doi.org/10.1016/j.eswa.2017.08.008) Son, J., & Kim, S. B. 2017. Content-based filtering for recommendation systems using multiattribute networks. Expert Systems with Applications, 89, 404–412. https://doi.org/10.1016/j.eswa.2017.08.008
