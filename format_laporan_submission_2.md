@@ -38,23 +38,33 @@ Menggunakan interaksi rating user-anime. NeuMF menggabungkan Generalized Matrix 
 
 Dataset diambil dari [Kaggle - Anime Recommendations Database](https://www.kaggle.com/datasets/CooperUnion/anime-recommendations-database/data) dan terdiri dari:
 1. anime.csv :
-    - anime_id: ID unik anime
-    - name: Nama anime
-    - genre: Daftar genre
-    - type: Tipe anime (TV, Movie, OVA)
-    - rating: Rating rata-rata
-    - synopsis: Deskripsi/sinopsis anime
+    - anime_id (integer): ID unik anime
+    - name (object): Nama anime
+    - genre (object): Daftar genre
+    - episodes (object): jumlah episode dalam 1 film
+    - type (object) : Tipe anime (TV, Movie, OVA)
+    - rating (float) : Rating rata-rata
+    - members (integer) : jumlah member didalam comunity group anime
+    - Jumlah baris : 12294
+    - Jumlah missing Value : Genre (62), Type (25), Rating (230)
+    - jumlah duplikat : 0
 2. rating.csv
-   - user_id: ID pengguna
-   - anime_id: ID anime
-   - rating: Skor yang diberikan pengguna (1-10, -1 untuk belum menonton)
+   - user_id (integer): ID pengguna
+   - anime_id (integer): ID anime
+   - rating (integer): Skor yang diberikan pengguna (1-10, -1 untuk belum menonton)
+   - jumlah baris : 7813737
+   - jumlah missing value : 0
+   - jumlah duplikat data 1
 
 Sebelum melakukan EDA dilakukan pengecekan informasi data seperti info, head, cek missing value, dan cek duplikat langkah ini bertujuan agar bisa diantisipasi di data preparation untuk dibenahi jika masih ada data yang kotor.
 
 ### B. Exploratory Data Analysis (EDA)
 - Distribusi jumlah rating per user : jumlah yang memberikan rating 8 terbanyak diikuti oleh rating 7 dan rating 9
+  ![image](https://github.com/fawaid12/contoh-laporan-mlt/blob/02666f3ca631cd00beefaf51cd077318f7d979d5/Screenshot%20(1065).png)
 - Genre yang paling umum : genre terbanyak yaitu comedy dengan jumlah judul anime 4000 lebih kemudian diikuti genre action, adventure, dan lainnya.
-- Korelasi rating vs genre : genre anime dengan rata-rata rating tertinggi yaitu anime yang bergenre josei dengan rating lebih dari 7 mendekati 8, kemudian diikuti oleh thriler, mystery, dan lainnya. 
+  ![image](https://github.com/fawaid12/contoh-laporan-mlt/blob/02666f3ca631cd00beefaf51cd077318f7d979d5/Screenshot%20(1066).png)
+- Korelasi rating vs genre : genre anime dengan rata-rata rating tertinggi yaitu anime yang bergenre josei dengan rating lebih dari 7 mendekati 8, kemudian diikuti oleh thriler, mystery, dan lainnya.
+  ![image](https://github.com/fawaid12/contoh-laporan-mlt/blob/02666f3ca631cd00beefaf51cd077318f7d979d5/Screenshot%20(1067).png)
 
 ## Data Preparation
 Sebelum membangun model sistem rekomendasi, langkah krusial yang harus dilakukan adalah data preparation. Data mentah sering kali mengandung nilai kosong, duplikat, inkonsistensi format, serta belum dalam bentuk yang sesuai untuk diolah oleh model. Tanpa tahap ini, performa model bisa menurun drastis atau bahkan gagal dijalankan. Data cleaning yang dilakukan secara umum penghapusan data missing value dan data duplicate. Tanpa tahap ini, performa model bisa menurun drastis atau bahkan gagal dijalankan. Oleh karena itu, data preparation dilakukan untuk memastikan:
@@ -66,10 +76,9 @@ Sebelum membangun model sistem rekomendasi, langkah krusial yang harus dilakukan
 ### Content Based Filtering
 Untuk pendekatan Content-Based Filtering, proses persiapan data berfokus pada atribut konten dari anime, yaitu genre. Berikut adalah tahapan yang dilakukan:
 - Penanganan Missing Values : Kolom genre diperiksa, dan setiap nilai kosong (NaN) diisi dengan 'unknown' agar dapat diproses secara konsisten.
+- penanganan data duplicate dengan menghapus data
 - Penyaringan Data Unik dan Valid: Hanya data anime yang memiliki genre dan nama yang valid serta tidak duplikat yang dipertahankan. Hal ini memastikan bahwa model tidak membandingkan atau merekomendasikan entri yang tidak informatif.
 - Ekstraksi Fitur Konten : Genre dari anime diproses menggunakan teknik TF-IDF Vectorization untuk mengubah data teks menjadi representasi vektor numerik. Teknik ini mempertimbangkan frekuensi relatif kata dalam genre untuk menilai kepentingannya.
-- Perhitungan Similaritas : Matriks kemiripan antar anime dihitung menggunakan cosine similarity terhadap vektor hasil TF-IDF. Ini menghasilkan nilai kemiripan antar anime berdasarkan genre-nya.
-- Mapping Judul ke Indeks: Dibuat pemetaan antara nama anime dan indeksnya dalam dataset anime_cs. Ini berguna untuk pencarian dan rekomendasi berdasarkan nama anime yang diinput pengguna.
 
 ### Collaborative Filtering 
 Pada pendekatan Collaborative Filtering, data rating pengguna dan informasi anime dipersiapkan agar bisa digunakan oleh model berbasis Neural Collaborative Filtering (NeuMF). Adapun langkah-langkah persiapan data yang dilakukan adalah sebagai berikut:
@@ -94,6 +103,8 @@ Content- based filtering merupakan sistem rekomendasi yang didasari dengan korel
 - terbatasnya rekomendasi hanya pada item-item yang mirip sehingga tidak ada kesempatan untuk mendapatkan item yang tidak terduga [[4]](https://jurnal.uns.ac.id/itsmart/article/viewFile/35008/27748)
 
 #### Tahapan Model
+- Perhitungan Similaritas : Matriks kemiripan antar anime dihitung menggunakan cosine similarity terhadap vektor hasil TF-IDF. Ini menghasilkan nilai kemiripan antar anime berdasarkan genre-nya.
+- Mapping Judul ke Indeks: Dibuat pemetaan antara nama anime dan indeksnya dalam dataset anime_cs. Ini berguna untuk pencarian dan rekomendasi berdasarkan nama anime yang diinput pengguna.
 - Mengambil indeks anime.
 - Hitung cosine similarity antar-anime.
 - Hindari merekomendasikan dirinya sendiri.
@@ -131,8 +142,11 @@ Neural Matrix Factorization (NeuMF) merupakan model sistem rekomendasi yang diba
   - Batch size : 64
 ### Top N-Recomendation
 Pada tahap ini dilakukan uji coba terhadap model yang dibangun dengan 10 top rekomendation yaitu 
-- Conten Based Filtering menggunakan fitur name atau judul anime naruto yang menghasilkan judul yang berhubungan dengan naruto dan genre mirip dengan genre naruto
-- Collaborative Filtering dengen NeuMF menggunakan fitur user_id yang mana menghasilkan 10 top rekomendasi judul anime yang disukai oleh user_id. contoh yang diambil user_id 3
+- Conten Based Filtering menggunakan fitur name atau judul anime naruto yang menghasilkan judul yang berhubungan dengan naruto dan genre mirip dengan genre naruto. Hasil dari rekomendasi dapat dilihat pada gambar di bawah ini
+
+  ![image](https://github.com/fawaid12/contoh-laporan-mlt/blob/c1d0da03b5419b61c56f8150507c5545460293c6/Screenshot%20(1068).png)
+- Collaborative Filtering dengen NeuMF menggunakan fitur user_id yang mana menghasilkan 10 top rekomendasi judul anime yang disukai oleh user_id. contoh yang diambil user_id 3 seperti pada gambar di bawah ini.
+  ![image](https://github.com/fawaid12/contoh-laporan-mlt/blob/c1d0da03b5419b61c56f8150507c5545460293c6/Screenshot%20(1069).png)
 
 ## Evaluation
 Evaluasi bertujuan untuk mengukur tingkat keberhasilan pembangunan sebuah model yang dihasilkan.
