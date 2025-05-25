@@ -60,7 +60,7 @@ Sebelum melakukan EDA dilakukan pengecekan informasi data seperti info, head, ce
 
 ### B. Exploratory Data Analysis (EDA)
 - Distribusi jumlah rating per user : jumlah yang memberikan rating 8 terbanyak diikuti oleh rating 7 dan rating 9
-  ![alt text](https://github.com/fawaid12/contoh-laporan-mlt/blob/main/image/gambar%201.png?raw=true)
+  ![image](https://github.com/fawaid12/contoh-laporan-mlt/blob/main/image/gambar%201.png?raw=true)
 - Genre yang paling umum : genre terbanyak yaitu comedy dengan jumlah judul anime 4000 lebih kemudian diikuti genre action, adventure, dan lainnya.
   ![alt text](https://github.com/fawaid12/contoh-laporan-mlt/blob/main/image/gambar%202.png?raw=true)
 - Korelasi rating vs genre : genre anime dengan rata-rata rating tertinggi yaitu anime yang bergenre josei dengan rating lebih dari 7 mendekati 8, kemudian diikuti oleh thriler, mystery, dan lainnya.
