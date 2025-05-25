@@ -60,11 +60,11 @@ Sebelum melakukan EDA dilakukan pengecekan informasi data seperti info, head, ce
 
 ### B. Exploratory Data Analysis (EDA)
 - Distribusi jumlah rating per user : jumlah yang memberikan rating 8 terbanyak diikuti oleh rating 7 dan rating 9
-  ![Distribusi](https://github.com/fawaid12/contoh-laporan-mlt/blob/02666f3ca631cd00beefaf51cd077318f7d979d5/Screenshot%20(1065).png)
+  ![alt text](https://github.com/fawaid12/contoh-laporan-mlt/blob/main/image/Screenshot%20(1065).png?raw=true)
 - Genre yang paling umum : genre terbanyak yaitu comedy dengan jumlah judul anime 4000 lebih kemudian diikuti genre action, adventure, dan lainnya.
-  ![genre](https://github.com/fawaid12/contoh-laporan-mlt/blob/02666f3ca631cd00beefaf51cd077318f7d979d5/Screenshot%20(1066).png)
+  ![alt text](https://github.com/fawaid12/contoh-laporan-mlt/blob/main/image/Screenshot%20(1066).png?raw=true)
 - Korelasi rating vs genre : genre anime dengan rata-rata rating tertinggi yaitu anime yang bergenre josei dengan rating lebih dari 7 mendekati 8, kemudian diikuti oleh thriler, mystery, dan lainnya.
-  ![korelasi](https://github.com/fawaid12/contoh-laporan-mlt/blob/02666f3ca631cd00beefaf51cd077318f7d979d5/Screenshot%20(1067).png)
+  ![alt text](https://github.com/fawaid12/contoh-laporan-mlt/blob/main/image/Screenshot%20(1067).png?raw=true)
 
 ## Data Preparation
 Sebelum membangun model sistem rekomendasi, langkah krusial yang harus dilakukan adalah data preparation. Data mentah sering kali mengandung nilai kosong, duplikat, inkonsistensi format, serta belum dalam bentuk yang sesuai untuk diolah oleh model. Tanpa tahap ini, performa model bisa menurun drastis atau bahkan gagal dijalankan. Data cleaning yang dilakukan secara umum penghapusan data missing value dan data duplicate. Tanpa tahap ini, performa model bisa menurun drastis atau bahkan gagal dijalankan. Oleh karena itu, data preparation dilakukan untuk memastikan:
@@ -144,9 +144,9 @@ Neural Matrix Factorization (NeuMF) merupakan model sistem rekomendasi yang diba
 Pada tahap ini dilakukan uji coba terhadap model yang dibangun dengan 10 top rekomendation yaitu 
 - Conten Based Filtering menggunakan fitur name atau judul anime naruto yang menghasilkan judul yang berhubungan dengan naruto dan genre mirip dengan genre naruto. Hasil dari rekomendasi dapat dilihat pada gambar di bawah ini
 
-  ![content based](https://github.com/fawaid12/contoh-laporan-mlt/blob/c1d0da03b5419b61c56f8150507c5545460293c6/Screenshot%20(1068).png)
+  ![alt text](https://github.com/fawaid12/contoh-laporan-mlt/blob/main/image/Screenshot%20(1068).png?raw=true)
 - Collaborative Filtering dengen NeuMF menggunakan fitur user_id yang mana menghasilkan 10 top rekomendasi judul anime yang disukai oleh user_id. contoh yang diambil user_id 3 seperti pada gambar di bawah ini.
-  ![colaborative](https://github.com/fawaid12/contoh-laporan-mlt/blob/c1d0da03b5419b61c56f8150507c5545460293c6/Screenshot%20(1069).png)
+  ![alt text](https://github.com/fawaid12/contoh-laporan-mlt/blob/main/image/Screenshot%20(1069).png?raw=true)
 
 ## Evaluation
 Evaluasi bertujuan untuk mengukur tingkat keberhasilan pembangunan sebuah model yang dihasilkan.
